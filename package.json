@@ -1,6 +1,6 @@
 {
   "name": "dev-base",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "This is a minimal base for front-enf development with CoffeeScript, Jade and Stylus",
   "main": "Gruntfile.js",
   "scripts": {
