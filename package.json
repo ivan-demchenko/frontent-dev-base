@@ -1,0 +1,35 @@
+{
+  "name": "dev-base",
+  "version": "0.0.0",
+  "description": "This is a minimal base for front-enf development with CoffeeScript, Jade and Stylus",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "keywords": [
+    "front-end",
+    "coffee",
+    "jade",
+    "stylus",
+    "base"
+  ],
+  "author": "Ivan Demchenko",
+  "license": "GNU General Public License",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:raqystyle/devbase.git"
+  },
+  "bugs": {
+    "url": "https://github.com/raqystyle/devbase/issues"
+  },
+  "devDependencies": {
+    "grunt-contrib-coffee": "~0.8.0",
+    "grunt-contrib-stylus": "~0.11.0",
+    "grunt": "~0.4.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-jade": "~0.9.0",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-clean": "~0.5.0"
+  }
+}
