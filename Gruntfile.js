@@ -37,6 +37,15 @@ module.exports = function(grunt) {
           dest: 'frontend/temp/js/',
           ext: '.js'
         }]
+      },
+      tests: {
+        files: [{
+          expand: true,
+          cwd: 'frontend/tests/coffee/',
+          src: ['**/*.coffee'],
+          dest: 'frontend/tests/js/',
+          ext: '.js'
+        }]
       }
     },
 
@@ -77,18 +86,27 @@ module.exports = function(grunt) {
 
     clean: ['frontend/temp'],
 
-uglify: {
-  options: {
-    sourceMap: 'frontend/builds/prod/source-map.js',
-    banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-    "<%= grunt.template.today(\"yyyy-mm-dd\") %> */\n"
-  },
-  prod: {
-    files: {
-      'frontend/builds/prod/app.min.js': ['frontend/builds/prod/app.js']
+    uglify: {
+      options: {
+        sourceMap: 'frontend/builds/prod/source-map.js',
+        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+        "<%= grunt.template.today(\"yyyy-mm-dd\") %> */\n"
+      },
+      prod: {
+        files: {
+          'frontend/builds/prod/app.min.js': ['frontend/builds/prod/app.js']
+        }
+      }
+    },
+
+    /*
+     * Tests
+     */
+    karma: {
+      unit: {
+        configFile: 'frontend/tests/karma.conf.js'
+      }
     }
-  }
-}
 
   });
 
@@ -99,9 +117,18 @@ uglify: {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-karma');
 
   grunt.registerTask('dev', [
+    'coffee:dev', 'stylus:dev', 'jade:dev'
+  ]);
+
+  grunt.registerTask('dev-watch', [
     'coffee:dev', 'stylus:dev', 'jade:dev', 'watch'
+  ]);
+
+  grunt.registerTask('test', [
+    'coffee:tests', 'karma'
   ]);
 
   grunt.registerTask('default', [
