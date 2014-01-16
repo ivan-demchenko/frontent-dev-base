@@ -8,7 +8,6 @@ module.exports = function(config) {
     ],
     reporters: ['progress', 'junit'],
     browsers: ['Chrome'],
-    singleRun: true,
     port: 9876,
     runnerPort: 9999,
     colors: true

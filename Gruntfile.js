@@ -2,19 +2,28 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
+    paths: {
+      dev: 'frontend/builds/dev',
+      prod: 'frontend/builds/prod',
+      tests: 'frontend/tests',
+      scripts: 'frontend/src/coffee',
+      styles: 'frontend/src/stylus',
+      markup: 'frontend/src/jade'
+    },
+
     pkg: grunt.file.readJSON('package.json'),
 
     watch: {
       coffee: {
-        files: ['frontend/src/coffee/**/*.coffee'],
+        files: ['<%= paths.scripts %>/**/*.coffee'],
         tasks: ['coffee:dev']
       },
       stylus: {
-        files: ['frontend/src/stylus/**/*.styl'],
+        files: ['<%= paths.styles %>/**/*.styl'],
         tasks:['stylus:dev']
       },
       jade: {
-        files: ['frontend/src/jade/**/*.jade'],
+        files: ['<%= paths.markup %>/**/*.jade'],
         tasks: ['jade:dev']
       }
     },
@@ -23,16 +32,16 @@ module.exports = function(grunt) {
       dev: {
         files: [{
           expand: true,
-          cwd: 'frontend/src/coffee/',
+          cwd: '<%= paths.scripts %>/',
           src: ['**/*.coffee'],
-          dest: 'frontend/builds/dev/js/',
+          dest: '<%= paths.dev %>/js/',
           ext: '.js'
         }]
       },
       prod: {
         files: [{
           expand: true,
-          cwd: 'frontend/src/coffee/',
+          cwd: '<%= paths.scripts %>/',
           src: ['**/*.coffee'],
           dest: 'frontend/temp/js/',
           ext: '.js'
@@ -41,9 +50,9 @@ module.exports = function(grunt) {
       tests: {
         files: [{
           expand: true,
-          cwd: 'frontend/tests/coffee/',
+          cwd: '<%= paths.tests %>/coffee/',
           src: ['**/*.coffee'],
-          dest: 'frontend/tests/js/',
+          dest: '<%= paths.tests %>/js/',
           ext: '.js'
         }]
       }
@@ -53,9 +62,9 @@ module.exports = function(grunt) {
       dev: {
         files: [{
           expand: true,
-          cwd: 'frontend/src/stylus/',
+          cwd: '<%= paths.styles %>/',
           src: ['**/*.styl'],
-          dest: 'frontend/builds/dev/css/',
+          dest: '<%= paths.dev %>/css/',
           ext: '.css'
         }]
       }
@@ -65,9 +74,9 @@ module.exports = function(grunt) {
       dev: {
         files: [{
           expand: true,
-          cwd: 'frontend/src/jade/',
+          cwd: '<%= paths.markup %>/',
           src: ['**/*.jade'],
-          dest: 'frontend/builds/dev/templates/',
+          dest: '<%= paths.dev %>/templates/',
           ext: '.html'
         }]
       }
@@ -80,7 +89,7 @@ module.exports = function(grunt) {
       },
       prod: {
         src: ['frontend/temp/js/**/*.js'],
-        dest: 'frontend/builds/prod/app.js'
+        dest: '<%= paths.prod %>/app.js'
       }
     },
 
@@ -88,13 +97,13 @@ module.exports = function(grunt) {
 
     uglify: {
       options: {
-        sourceMap: 'frontend/builds/prod/source-map.js',
+        sourceMap: '<%= paths.prod %>/source-map.js',
         banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
         "<%= grunt.template.today(\"yyyy-mm-dd\") %> */\n"
       },
       prod: {
         files: {
-          'frontend/builds/prod/app.min.js': ['frontend/builds/prod/app.js']
+          '<%= paths.prod %>/app.min.js': ['<%= paths.prod %>/app.js']
         }
       }
     },
@@ -104,7 +113,8 @@ module.exports = function(grunt) {
      */
     karma: {
       unit: {
-        configFile: 'frontend/tests/karma.conf.js'
+        singleRun: false,
+        configFile: '<%= paths.tests %>/karma.conf.js'
       }
     }
 
