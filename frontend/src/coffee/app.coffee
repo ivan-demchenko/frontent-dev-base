@@ -1,0 +1,1 @@
+global = exports or this

@@ -1,0 +1,26 @@
+{
+  "name": "frontend-dev-base",
+  "version": "0.0.3",
+  "homepage": "https://github.com/raqystyle/frontent-dev-base",
+  "authors": [
+    "Ivan Demchenko <raqy.style@gmail.com>"
+  ],
+  "description": "Boilerplate for rapid development start",
+  "main": "Gruntfile.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "frontend/vendor",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "960-grid-system": "*",
+    "vertical-rhythm": "~0.3.3",
+    "hydra-typography": "*",
+    "normalize-css": "~3.0.0"
+  }
+}
