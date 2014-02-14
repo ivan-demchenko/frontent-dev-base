@@ -3,8 +3,8 @@ module.exports = function(config) {
     basePath: '..',
     frameworks: ["jasmine"],
     files: [
-      'builds/dev/js/*.js',
-      'tests/js/*.js'
+      'builds/dev/js/**/*.js',
+      'tests/js/**/*.js'
     ],
     reporters: ['progress', 'junit'],
     browsers: ['Chrome'],

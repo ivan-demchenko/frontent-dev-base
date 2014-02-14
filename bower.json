@@ -18,10 +18,9 @@
     "tests"
   ],
   "devDependencies": {
-    "960-grid-system": "*",
     "vertical-rhythm": "~0.3.3",
     "hydra-typography": "*",
-    "normalize-css": "~3.0.0",
-    "stylper": "*"
+    "stylper": "*",
+    "normalize.styl": "~3.0.0"
   }
 }

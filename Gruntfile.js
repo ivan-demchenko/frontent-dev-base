@@ -3,12 +3,14 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     paths: {
-      dev: 'frontend/builds/dev',
-      prod: 'frontend/builds/prod',
-      tests: 'frontend/tests',
-      scripts: 'frontend/src/coffee',
-      styles: 'frontend/src/stylus',
-      markup: 'frontend/src/jade'
+      fe:       'frontend',
+      dev:      '<%= paths.fe %>/builds/dev',
+      prod:     '<%= paths.fe %>/builds/prod',
+      srcdir:   '<%= paths.fe %>/src',
+      tests:    '<%= paths.fe %>/tests',
+      scripts:  '<%= paths.srcdir %>/coffee',
+      styles:   '<%= paths.srcdir %>/stylus',
+      markup:   '<%= paths.srcdir %>/jade'
     },
 
     pkg: grunt.file.readJSON('package.json'),
@@ -72,13 +74,22 @@ module.exports = function(grunt) {
 
     jade: {
       dev: {
-        files: [{
-          expand: true,
-          cwd: '<%= paths.markup %>/',
-          src: ['**/*.jade'],
-          dest: '<%= paths.dev %>/templates/',
-          ext: '.html'
-        }]
+        options: {
+          pretty: true
+        },
+        files: [
+          {
+            src: '<%= paths.srcdir %>/index.jade',
+            dest: '<%= paths.dev %>/index.html'
+          },
+          {
+            expand: true,
+            cwd: '<%= paths.markup %>/',
+            src: ['**/*.jade'],
+            dest: '<%= paths.dev %>/templates/',
+            ext: '.html'
+          }
+        ]
       }
     },
 
@@ -108,12 +119,11 @@ module.exports = function(grunt) {
       }
     },
 
-    /*
-     * Tests
-     */
+    // Tests
+    // ----------------
     karma: {
       unit: {
-        singleRun: false,
+        singleRun: true,
         configFile: '<%= paths.tests %>/karma.conf.js'
       }
     }
@@ -131,10 +141,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('dev', [
     'coffee:dev', 'stylus:dev', 'jade:dev'
-  ]);
-
-  grunt.registerTask('dev-watch', [
-    'coffee:dev', 'stylus:dev', 'jade:dev', 'watch'
   ]);
 
   grunt.registerTask('test', [
